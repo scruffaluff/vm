@@ -1,0 +1,28 @@
+# GitHub Actions workflow file.
+#
+# For more information, visit
+# https://docs.github.com/actions/learn-github-actions.
+
+---
+name: main
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: Operating system
+        options:
+          - macos
+          - ubuntu
+          - windows
+        required: true
+        type: choice
+
+jobs:
+  dev:
+    name: Launch development workspace
+    runs-on: ${{ inputs.os }}-latest
+    steps:
+      - name: Launch Tmate session
+        timeout-minutes: 120
+        uses: mxschmitt/action-tmate@v3
